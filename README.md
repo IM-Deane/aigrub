@@ -1,47 +1,45 @@
-# TypeScript Next.js example
+# What should I eat tonight app idea
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+Website where users enter some dietary preferences (ie. gluten free, no
+tomatoes) and the app generates a list of meal ideas and recipes.
 
-## Deploy your own
+This is a simple straightforward web application that uses Next.js and material
+ui.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-typescript)
+The main goal is to leverage OpenAI to generate custom/random recipes.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+## MVP:
 
-## How to use it?
+These are the minimum required features before releasing the application.
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+### Features:
 
-```bash
-npx create-next-app --example with-typescript with-typescript-app
-```
+- A user can enter their dietary preferences as a list of keywords (ie.
+  gluten-free, no tomatoes, no dairy)
+- Submitting the form with at least one di
 
-```bash
-yarn create next-app --example with-typescript with-typescript-app
-```
+## Project setup
 
-```bash
-pnpm create next-app --example with-typescript with-typescript-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
-
-## Notes
-
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
+1. Clone the project to your computer
 
 ```
-npm install --save-dev typescript
+git clone git@github.com:IM-Deane/what-should-I-eat-tonight.git
 ```
 
-To enable TypeScript's features, we install the type declarations for React and Node.
+2. Navigate to the project folder and install dependencies
 
 ```
-npm install --save-dev @types/react @types/react-dom @types/node
+cd what-should-I-eat-tonight && npm install
 ```
 
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
+3. Run the project
 
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
+```
+npm run dev
+```
 
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+### Notes:
+
+A `type-check` script is included in `package.json`, which runs TypeScript's
+`tsc` CLI in `noEmit` mode to run type-checking separately. You can then include
+this, for example, in your `test` scripts.
