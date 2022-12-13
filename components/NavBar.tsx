@@ -15,17 +15,6 @@ import AdbIcon from "@mui/icons-material/Adb";
 
 const BRAND_NAME = "WSIET";
 
-const styles = {
-	menuLink: {
-		marginRight: "12px",
-		color: "white",
-		textTransform: "uppercase",
-		textDecoration: "none",
-		fontWeight: "bold",
-		letterSpacing: "2px",
-	},
-};
-
 function NavBar() {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
