@@ -1,10 +1,17 @@
-import { useState } from "react";
+import * as React from "react";
+
+import Chip from "@mui/material/Chip";
+import LoadingButton from "@mui/lab/LoadingButton";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 const RecipeForm = ({ handleMeals }) => {
-	const [dietPreferences, setDietPreferences] = useState([]);
-	const [newPreference, setNewPref] = useState("");
+	const [dietPreferences, setDietPreferences] = React.useState([]);
+	const [newPreference, setNewPref] = React.useState("");
+	const [isLoading, setIsLoading] = React.useState(false);
 
-	const handleChange = (e) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setNewPref(e.target.value);
 	};
 
@@ -16,8 +23,6 @@ const RecipeForm = ({ handleMeals }) => {
 				label: newPreference,
 			},
 		]);
-
-		// reset input field value
 		setNewPref("");
 	};
 
@@ -35,6 +40,7 @@ const RecipeForm = ({ handleMeals }) => {
 		setNewPref("");
 
 		// TODO: should add loading state
+		setIsLoading(true);
 
 		// TODO: should likely cache duplicate requests (SWR?)
 		fetch("/api/generate/meals", {
@@ -48,53 +54,38 @@ const RecipeForm = ({ handleMeals }) => {
 			.then(({ result }) => handleMeals(result));
 
 		// TODO: end loading state
+		setIsLoading(false);
 	};
 
 	return (
 		<div style={{ width: "100%" }}>
-			<div
-				style={{
-					minHeight: "10px",
-					display: "flex",
-					justifyContent: "flex-start",
-
-					flexWrap: "wrap",
-					padding: "5px",
-				}}
-			>
+			<Stack direction="row" spacing={1}>
 				{dietPreferences.map((pref) => (
-					<p
-						style={{
-							marginRight: "8px",
-							border: "1px solid black",
-							borderRadius: "8px",
-							padding: "5px 10px",
-							textTransform: "capitalize",
-						}}
+					<Chip
 						key={pref.key}
-						onClick={() => handleDeletePref(pref)}
-					>
-						{pref.label}
-					</p>
+						label={pref.label}
+						color="secondary"
+						variant="outlined"
+						onDelete={() => handleDeletePref(pref)}
+					/>
 				))}
-			</div>
+			</Stack>
 			<form onSubmit={handleSubmit}>
-				<fieldset>
-					<label htmlFor="preferences">Enter your dietary preferences:</label>
-					<br />
-					<input
-						type="text"
-						id="preferences"
-						name="preferences"
+				<div style={{ marginTop: "20px", width: "400px" }}>
+					<TextField
+						label="Preferences"
+						size="small"
 						value={newPreference}
 						placeholder="eg. gluten-free"
 						onChange={handleChange}
 					/>
-					<button type="button" onClick={handleAddPref}>
+					<Button variant="outlined" size="small" onClick={handleAddPref}>
 						Save Preference
-					</button>
-				</fieldset>
-				<input type="submit" value="Submit" style={{ marginTop: "10px" }} />
+					</Button>
+				</div>
+				<LoadingButton loading={isLoading} variant="contained" type="submit">
+					Create
+				</LoadingButton>
 			</form>
 		</div>
 	);

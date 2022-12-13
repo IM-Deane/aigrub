@@ -3,6 +3,9 @@ import Head from "next/head";
 
 import CssBaseline from "@mui/material/CssBaseline";
 
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
@@ -15,7 +18,7 @@ const Layout = ({ children, title = "What should I eat tonight?" }: Props) => {
 	return (
 		<React.Fragment>
 			<CssBaseline />
-			<div
+			<Box
 				style={{
 					position: "relative",
 					minHeight: "100vh",
@@ -32,9 +35,11 @@ const Layout = ({ children, title = "What should I eat tonight?" }: Props) => {
 					/>
 				</Head>
 				<NavBar />
-				<main style={{ paddingBottom: "2.5rem" }}>{children}</main>
+				<Container component="main" style={{ paddingBottom: "2.5rem" }}>
+					{children}
+				</Container>
 				<Footer />
-			</div>
+			</Box>
 		</React.Fragment>
 	);
 };
