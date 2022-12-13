@@ -11,7 +11,6 @@ const openai = new OpenAIApi(configuration);
 
 export async function getServerSideProps({ params }) {
 	const mealStr = convertURLToMealString(params.url);
-	let recipe = "";
 
 	// FIXME: cache this request as it is being called on every page load
 	const completion = await openai.createCompletion({
@@ -31,12 +30,10 @@ export async function getServerSideProps({ params }) {
 		};
 	}
 
-	recipe = completion.data.choices[0].text;
-
 	return {
 		props: {
 			meal: mealStr,
-			recipe: recipe,
+			recipe: completion.data.choices[0].text,
 		}, // will be passed to the page component as props
 	};
 }
