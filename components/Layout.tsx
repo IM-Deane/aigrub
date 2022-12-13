@@ -6,11 +6,10 @@ import Footer from "./Footer";
 
 type Props = {
 	children?: ReactNode;
-	userData?: object;
 	title?: string;
 };
 
-const Layout = ({ children, title = "This is the default title" }: Props) => {
+const Layout = ({ children, title = "What should I eat tonight?" }: Props) => {
 	return (
 		<div>
 			<Head>
