@@ -11,15 +11,14 @@ export default async function handler(req, res) {
 		const completion = await openai.createCompletion({
 			model: "text-davinci-003",
 			prompt: generateMealsPrompt(req.body.dietPreferences),
-			n: 3, // number of meals to generate
+			n: 1, // number of meals to generate
 			temperature: 0.7,
 			max_tokens: 256,
 			top_p: 1,
 			frequency_penalty: 0,
 			presence_penalty: 0,
 		});
-		console.log(completion);
-		res.status(200).json({ result: completion.data.choices });
+		res.status(200).json({ result: completion.data.choices[0] });
 	}
 }
 

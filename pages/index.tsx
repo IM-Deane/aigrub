@@ -3,14 +3,14 @@ import { useState } from "react";
 import Layout from "../components/Layout";
 import RecipeForm from "../components/RecipeForm";
 
+import { cleanMealData } from "../utils";
+
 const IndexPage = () => {
 	const [meals, setMeals] = useState([]);
 
 	const handleMeals = (mealData) => {
-		// get meal text
-		console.log(mealData);
-		const mealList = mealData.map((meal) => meal.text);
-		setMeals(mealList);
+		const newList = cleanMealData(mealData.text);
+		setMeals(newList);
 	};
 
 	return (
@@ -33,8 +33,10 @@ const IndexPage = () => {
 			<RecipeForm handleMeals={handleMeals} />
 			{/* render meal list if it exists */}
 			<div>
+				<h2>Meal ideas:</h2>
 				{meals.length > 0 && (
 					<ul>
+						{/* TODO: add link to new page */}
 						{meals.map((meal, index) => (
 							<li key={index}>{meal}</li>
 						))}
