@@ -28,6 +28,7 @@ const Layout = ({ children, title = "What should I eat tonight?" }: Props) => {
 			>
 				<Head>
 					<title style={{ textTransform: "capitalize" }}>{title}</title>
+					<link rel="shortcut icon" href="/images/favicon.png" />
 					<meta charSet="utf-8" />
 					<meta
 						name="viewport"
