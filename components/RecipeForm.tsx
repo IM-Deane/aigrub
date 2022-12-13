@@ -4,9 +4,20 @@ import Chip from "@mui/material/Chip";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 const RecipeForm = ({ handleMeals }) => {
-	const [dietPreferences, setDietPreferences] = React.useState([]);
+	// starting tags that can provide users with inspiration
+	const [dietPreferences, setDietPreferences] = React.useState([
+		{
+			key: 0,
+			label: "simple",
+		},
+		{
+			key: 1,
+			label: "no onions",
+		},
+	]);
 	const [newPreference, setNewPref] = React.useState("");
 	const [isLoading, setIsLoading] = React.useState(false);
 
@@ -64,7 +75,10 @@ const RecipeForm = ({ handleMeals }) => {
 
 	return (
 		<div style={{ width: "100%" }}>
-			<Stack direction="row" spacing={1}>
+			<Typography variant="subtitle2" paragraph gutterBottom>
+				Here are some ideas to get you started:
+			</Typography>
+			<Stack direction="row" spacing={1} sx={{ minHeight: "32px" }}>
 				{dietPreferences.map((pref) => (
 					<Chip
 						key={pref.key}

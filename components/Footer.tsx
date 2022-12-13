@@ -5,17 +5,23 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 
+import EmojiFoodBeverageIcon from "@mui/icons-material/EmojiFoodBeverage";
+
 function Copyright() {
 	return (
 		<Fragment>
-			Made with &hearts; by{" "}
+			Made with{" "}
+			<span>
+				(<EmojiFoodBeverageIcon sx={{ fontSize: "10px" }} /> + &hearts;){" "}
+			</span>{" "}
+			by{" "}
 			<Link
 				color="inherit"
-				href="https://alchemizedsoftware.com"
+				href="https://tristandeane.ca"
 				target="_blank"
 				rel="noopener norefer"
 			>
-				Alchemized Software
+				Tristan Deane
 			</Link>
 		</Fragment>
 	);
