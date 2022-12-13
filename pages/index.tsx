@@ -11,7 +11,8 @@ const IndexPage = () => {
 	const [meals, setMeals] = useState([]);
 
 	const handleMeals = (mealData) => {
-		const newList = cleanMealData(mealData.text);
+		// get formatted list of meals in alphabetical order
+		const newList = cleanMealData(mealData.text).sort();
 		setMeals(newList);
 	};
 
