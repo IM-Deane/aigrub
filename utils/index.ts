@@ -8,3 +8,11 @@ export function cleanMealData(mealDataText: string): string[] {
 		.map((meal) => meal.trim());
 	return choiceList;
 }
+
+// convert a string into a valid URL (lowercase remove commas, replace spaces with dashes)
+export const convertMealStringToURL = (mealString: string): string =>
+	mealString.toLowerCase().replace(/,/g, "").replace(/\s+/g, "-");
+
+// convert the meal URL to string with no dashes
+export const convertURLToMealString = (url: string): string =>
+	url.replace(/-/g, " ");

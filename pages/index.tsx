@@ -1,9 +1,11 @@
 import { useState } from "react";
 
+import Link from "next/link";
+
 import Layout from "../components/Layout";
 import RecipeForm from "../components/RecipeForm";
 
-import { cleanMealData } from "../utils";
+import { cleanMealData, convertMealStringToURL } from "../utils";
 
 const IndexPage = () => {
 	const [meals, setMeals] = useState([]);
@@ -38,7 +40,11 @@ const IndexPage = () => {
 					<ul>
 						{/* TODO: add link to new page */}
 						{meals.map((meal, index) => (
-							<li key={index}>{meal}</li>
+							<li key={index}>
+								<Link href={`/recipes/${convertMealStringToURL(meal)}`}>
+									{meal}
+								</Link>
+							</li>
 						))}
 					</ul>
 				)}
