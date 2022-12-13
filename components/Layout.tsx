@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react";
-import Link from "next/link";
 import Head from "next/head";
 
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 type Props = {
 	children?: ReactNode;
@@ -20,11 +20,7 @@ const Layout = ({ children, title = "This is the default title" }: Props) => {
 			</Head>
 			<NavBar />
 			{children}
-			<footer>
-				<hr />
-				Made with &hearts; by{" "}
-				<a href="https://alchemizedsoftware.com">Alchemized Software</a>
-			</footer>
+			<Footer />
 		</div>
 	);
 };
