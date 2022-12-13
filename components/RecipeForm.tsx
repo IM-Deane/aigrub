@@ -6,8 +6,6 @@ const RecipeForm = ({ handleMeals }) => {
 
 	const handleChange = (e) => {
 		setNewPref(e.target.value);
-		// // on enter key add pref to list
-		// if (e.keyCode === 13) handleAddPref();
 	};
 
 	const handleAddPref = () => {
@@ -53,7 +51,7 @@ const RecipeForm = ({ handleMeals }) => {
 	};
 
 	return (
-		<div style={{ width: "500px" }}>
+		<div style={{ width: "100%" }}>
 			<div
 				style={{
 					minHeight: "10px",

@@ -110,7 +110,7 @@ function NavBar() {
 						<Link
 							href="/about"
 							style={{
-								marginRight: "12px",
+								margin: "0 28px",
 								color: "white",
 								textTransform: "uppercase",
 								textDecoration: "none",
@@ -123,7 +123,6 @@ function NavBar() {
 						<Link
 							href="/recipe-history"
 							style={{
-								marginRight: "12px",
 								color: "white",
 								textTransform: "uppercase",
 								textDecoration: "none",
