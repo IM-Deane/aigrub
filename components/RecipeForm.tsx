@@ -15,7 +15,11 @@ const RecipeForm = ({ handleMeals }) => {
 		setNewPref(e.target.value);
 	};
 
-	const handleAddPref = () => {
+	const handleAddPref = (e) => {
+		e.preventDefault();
+
+		if (newPreference === "") return;
+
 		setDietPreferences([
 			...dietPreferences,
 			{
@@ -37,7 +41,6 @@ const RecipeForm = ({ handleMeals }) => {
 	// handles form submission and response from server
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setNewPref("");
 
 		// TODO: should add loading state
 		setIsLoading(true);
@@ -55,6 +58,7 @@ const RecipeForm = ({ handleMeals }) => {
 
 		// TODO: end loading state
 		setIsLoading(false);
+		setNewPref("");
 	};
 
 	return (
@@ -70,21 +74,33 @@ const RecipeForm = ({ handleMeals }) => {
 					/>
 				))}
 			</Stack>
-			<form onSubmit={handleSubmit}>
-				<div style={{ marginTop: "20px", width: "400px" }}>
+			<form style={{ marginTop: "34px" }}>
+				<div>
 					<TextField
-						label="Preferences"
+						label="Your dietary preferences"
+						color="primary"
 						size="small"
 						value={newPreference}
+						fullWidth
 						placeholder="eg. gluten-free"
 						onChange={handleChange}
+						// if enter is pressed we add current value to preferences
+						onKeyPress={(e) => e.key === "Enter" && handleAddPref(e)}
 					/>
-					<Button variant="outlined" size="small" onClick={handleAddPref}>
+					{/* <Button variant="outlined" size="small" onClick={handleAddPref}>
 						Save Preference
-					</Button>
+					</Button> */}
 				</div>
-				<LoadingButton loading={isLoading} variant="contained" type="submit">
-					Create
+				<LoadingButton
+					loading={isLoading}
+					variant="contained"
+					fullWidth
+					type="button"
+					size="large"
+					sx={{ mt: 2, textTransform: "uppercase", fontWeight: "bold" }}
+					onClick={handleSubmit}
+				>
+					Generate Recipes
 				</LoadingButton>
 			</form>
 		</div>
