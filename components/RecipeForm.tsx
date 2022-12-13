@@ -4,7 +4,6 @@ import Chip from "@mui/material/Chip";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 
 const RecipeForm = ({ handleMeals }) => {
 	const [dietPreferences, setDietPreferences] = React.useState([]);
@@ -39,26 +38,28 @@ const RecipeForm = ({ handleMeals }) => {
 	};
 
 	// handles form submission and response from server
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		// TODO: should add loading state
 		setIsLoading(true);
 
 		// TODO: should likely cache duplicate requests (SWR?)
-		fetch("/api/generate/meals", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ dietPreferences: dietPreferences }),
-		})
-			.then((response) => response.json())
-			.then(({ result }) => handleMeals(result));
-
-		// TODO: end loading state
-		setIsLoading(false);
-		setNewPref("");
+		try {
+			const response = await fetch("/api/generate/meals", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ dietPreferences: dietPreferences }),
+			});
+			const { result } = await response.json();
+			handleMeals(result);
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setIsLoading(false);
+			setNewPref("");
+		}
 	};
 
 	return (
@@ -87,9 +88,6 @@ const RecipeForm = ({ handleMeals }) => {
 						// if enter is pressed we add current value to preferences
 						onKeyPress={(e) => e.key === "Enter" && handleAddPref(e)}
 					/>
-					{/* <Button variant="outlined" size="small" onClick={handleAddPref}>
-						Save Preference
-					</Button> */}
 				</div>
 				<LoadingButton
 					loading={isLoading}
