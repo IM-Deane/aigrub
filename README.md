@@ -1,4 +1,4 @@
-# What should I eat tonight app idea
+# AiGrub
 
 Website where users enter some dietary preferences (ie. gluten free, no
 tomatoes) and the app generates a list of meal ideas and recipes.

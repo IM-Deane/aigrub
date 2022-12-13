@@ -78,7 +78,7 @@ const RecipeForm = ({ handleMeals }) => {
 			<form style={{ marginTop: "34px" }}>
 				<div>
 					<TextField
-						label="Your dietary preferences"
+						label="Enter your dietary preferences"
 						color="primary"
 						size="small"
 						value={newPreference}

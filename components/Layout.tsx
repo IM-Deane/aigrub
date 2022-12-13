@@ -14,7 +14,7 @@ type Props = {
 	title?: string;
 };
 
-const Layout = ({ children, title = "What should I eat tonight?" }: Props) => {
+const Layout = ({ children, title = "AiGrub" }: Props) => {
 	return (
 		<React.Fragment>
 			<CssBaseline />

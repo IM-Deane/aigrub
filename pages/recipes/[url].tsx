@@ -45,7 +45,7 @@ type Props = {
 
 const RecipePage = ({ meal, recipe }: Props) => {
 	return (
-		<Layout title={`${meal ? meal : "Meal"} | What Should I Eat Tonight?`}>
+		<Layout title={`${meal ? meal : "Meal"} | AiGrub`}>
 			<div>
 				<h1 style={{ textTransform: "capitalize" }}>Meal: {meal}</h1>
 

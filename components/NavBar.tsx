@@ -11,9 +11,9 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
-import RestaurantIcon from "@mui/icons-material/Restaurant";
+import SmartToyIcon from "@mui/icons-material/SmartToy";
 
-const BRAND_NAME = "WSIET";
+const BRAND_NAME = "AiGrub";
 
 function NavBar() {
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -31,7 +31,7 @@ function NavBar() {
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
 					{/* Brand */}
-					<RestaurantIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+					<SmartToyIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
 					<Link href="/" passHref style={{ textDecoration: "none" }}>
 						<Typography
 							variant="h6"
@@ -87,7 +87,7 @@ function NavBar() {
 							</MenuItem>
 						</Menu>
 					</Box>
-					<RestaurantIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+					<SmartToyIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
 					<Typography
 						variant="h5"
 						noWrap
