@@ -23,7 +23,7 @@ const AboutPage = () => (
 						OpenAi's 's ChatGPT-3
 					</a>{" "}
 					took the world by storm in December 2022, I decided to see what all
-					fuss was about.
+					the fuss was about.
 				</Typography>
 				<Typography paragraph gutterBottom>
 					This app stems from my explorations into their documentation, a wicked
