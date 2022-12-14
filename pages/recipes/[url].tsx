@@ -53,9 +53,16 @@ const RecipePage = () => {
 	return (
 		<Layout title={`${meal ? meal : "Meal"} | AiGrub`}>
 			{isLoading ? (
-				<Container maxWidth="lg">
+				<Box
+					sx={{
+						mt: 5,
+						width: "100%",
+						display: "flex",
+						justifyContent: "center",
+					}}
+				>
 					<CircularProgress color="secondary" />
-				</Container>
+				</Box>
 			) : (
 				<Box sx={{ my: 3 }}>
 					<Typography
