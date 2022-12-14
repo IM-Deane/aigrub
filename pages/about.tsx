@@ -1,5 +1,6 @@
-import Link from "next/link";
 import Layout from "../components/Layout";
+
+import Link from "@mui/material/Link";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -19,9 +20,9 @@ const AboutPage = () => (
 				</Typography>
 				<Typography paragraph gutterBottom>
 					After{" "}
-					<a href="https://chat.openai.com/" target="_blank">
+					<Link href="https://chat.openai.com/" color="primary" target="_blank">
 						OpenAi's 's ChatGPT-3
-					</a>{" "}
+					</Link>{" "}
 					took the world by storm in December 2022, I decided to see what all
 					the fuss was about.
 				</Typography>
@@ -32,23 +33,31 @@ const AboutPage = () => (
 
 				<Typography paragraph gutterBottom>
 					If you enjoyed this app and want to say hi, please reach out to{" "}
-					<a href="mailto:contact@tristandeane.ca">contact@tristandeane.ca</a>.
+					<Link
+						href="mailto:contact@tristandeane.ca"
+						color="primary"
+						target="_blank"
+					>
+						contact@tristandeane.ca
+					</Link>
+					.
 				</Typography>
 				<Typography paragraph gutterBottom>
 					Otherwise, I'm always open to boosting my meager LinkedIn following
 					here:{" "}
-					<a
+					<Link
 						href="https://www.linkedin.com/in/tristan-deane-software-developer/"
+						color="primary"
 						target="_blank"
 					>
 						My LinkedIn
-					</a>
+					</Link>
 				</Typography>
 				<Typography paragraph gutterBottom>
 					Finally, you can find more of my work on my site:{" "}
-					<a href="https://tristandeane.ca" target="_blank">
+					<Link href="https://tristandeane.ca" color="primary" target="_blank">
 						tristandeane.ca
-					</a>
+					</Link>
 				</Typography>
 				<Typography paragraph>
 					Cheers,
