@@ -1,57 +1,76 @@
-import Layout from "../../components/Layout";
-import { generateRecipePrompt } from "../../utils/prompts";
+import * as React from "react";
 
-import { Configuration, OpenAIApi } from "openai";
+import { useRouter } from "next/router";
+
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+
+import Layout from "../../components/Layout";
+
 import { convertURLToMealString } from "../../utils";
 
-const configuration = new Configuration({
-	apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+const RecipePage = () => {
+	const [isLoading, setIsLoading] = React.useState(false);
+	const [meal, setIsMeal] = React.useState("");
+	const [recipe, setRecipe] = React.useState("");
 
-export async function getServerSideProps({ params }) {
-	const mealStr = convertURLToMealString(params.url);
+	const router = useRouter();
+	const { url } = router.query;
 
-	// FIXME: cache this request as it is being called on every page load
-	const completion = await openai.createCompletion({
-		model: "text-davinci-003",
-		prompt: generateRecipePrompt(mealStr),
-		temperature: 0.7,
-		max_tokens: 256,
-		top_p: 1,
-		frequency_penalty: 0,
-		presence_penalty: 0,
-	});
+	// once param isn't undefined we can get the path
+	React.useEffect(() => {
+		if (url) {
+			setIsMeal(convertURLToMealString(url as string));
+			fetchRecipe();
+		}
+	}, [url]);
 
-	// request failed
-	if (!completion) {
-		return {
-			notFound: true,
-		};
-	}
+	// handles form submission and response from server
+	const fetchRecipe = async () => {
+		setIsLoading(true);
 
-	return {
-		props: {
-			meal: mealStr,
-			recipe: completion.data.choices[0].text,
-		}, // will be passed to the page component as props
+		// TODO: should likely cache duplicate requests (SWR?)
+		try {
+			const response = await fetch("/api/generate/recipe", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ meal: meal }),
+			});
+			const { result } = await response.json();
+			setRecipe(result);
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setIsLoading(false);
+		}
 	};
-}
 
-type Props = {
-	meal: string;
-	recipe: string;
-};
-
-const RecipePage = ({ meal, recipe }: Props) => {
 	return (
 		<Layout title={`${meal ? meal : "Meal"} | AiGrub`}>
-			<div>
-				<h1 style={{ textTransform: "capitalize" }}>Meal: {meal}</h1>
-
-				<h2>Recipe:</h2>
-				<div style={{ whiteSpace: "pre-line" }}>{recipe}</div>
-			</div>
+			{isLoading ? (
+				<Container maxWidth="lg">
+					<CircularProgress color="secondary" />
+				</Container>
+			) : (
+				<Box sx={{ my: 3 }}>
+					<Typography
+						component="h1"
+						variant="h4"
+						style={{ textTransform: "capitalize" }}
+						gutterBottom
+					>
+						{meal}
+					</Typography>
+					<Typography component="h2" variant="h5">
+						Recipe:
+					</Typography>
+					<p style={{ whiteSpace: "pre-line" }}>{recipe}</p>
+				</Box>
+			)}
 		</Layout>
 	);
 };
