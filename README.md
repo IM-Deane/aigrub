@@ -8,6 +8,8 @@ ui.
 
 The main goal is to leverage OpenAI to generate custom/random recipes.
 
+**Current Version: 1.0.0**
+
 ## MVP:
 
 These are the minimum required features before releasing the application.
