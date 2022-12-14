@@ -23,7 +23,7 @@ const IndexPage = () => {
 
 	return (
 		<Layout title="AiGrub | Making Meal Time Fun, Fast and Flavorful with AI!">
-			<Grid container spacing={4} sx={{ mt: 5 }}>
+			<Grid container spacing={4} sx={{ my: 5 }}>
 				<Grid item xs={12}>
 					<Typography
 						component="h1"
@@ -70,7 +70,7 @@ const IndexPage = () => {
 						tailored to your tastes.
 					</Typography>
 
-					<Typography variant="body1" paragraph gutterBottom>
+					<Typography variant="body1" paragraph>
 						Save time, have fun and make the most of your cooking with AIGrub.
 					</Typography>
 				</Grid>
@@ -79,18 +79,18 @@ const IndexPage = () => {
 				</Grid>
 				{/* render meal list if it exists */}
 				<Grid item xs={12}>
-					<h2>Meal ideas:</h2>
-					{meals.length > 0 && (
-						<ul>
-							{meals.map((meal, index) => (
-								<li key={index}>
-									<Link href={`/recipes/${convertMealStringToURL(meal)}`}>
-										{meal}
-									</Link>
-								</li>
-							))}
-						</ul>
-					)}
+					<Typography component="h4" variant="h4">
+						Meal ideas:
+					</Typography>
+					<ul style={{ marginBottom: "8px", minHeight: "75px" }}>
+						{meals.map((meal, index) => (
+							<li key={index}>
+								<Link href={`/recipes/${convertMealStringToURL(meal)}`}>
+									{meal}
+								</Link>
+							</li>
+						))}
+					</ul>
 				</Grid>
 			</Grid>
 		</Layout>
