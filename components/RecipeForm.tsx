@@ -83,7 +83,7 @@ const RecipeForm = ({ handleMeals }) => {
 					<Chip
 						key={pref.key}
 						label={pref.label}
-						color="secondary"
+						color="success"
 						variant="outlined"
 						onDelete={() => handleDeletePref(pref)}
 					/>

@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-import Link from "next/link";
-
 import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 
 import SmartToyIcon from "@mui/icons-material/SmartToy";
@@ -87,7 +86,10 @@ const IndexPage = () => {
 					<ul style={{ marginBottom: "8px", minHeight: "75px" }}>
 						{meals.map((meal, index) => (
 							<li key={index}>
-								<Link href={`/recipes/${convertMealStringToURL(meal)}`}>
+								<Link
+									href={`/recipes/${convertMealStringToURL(meal)}`}
+									color="secondary"
+								>
 									{meal}
 								</Link>
 							</li>
