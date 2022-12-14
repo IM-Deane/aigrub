@@ -32,7 +32,9 @@ const IndexPage = () => {
 					>
 						AiGrub
 						<span>
-							<SmartToyIcon sx={{ fontSize: "61px", ml: 1 }} />
+							<SmartToyIcon
+								sx={{ fontSize: "61px", ml: 1, color: "secondary.main" }}
+							/>
 						</span>
 					</Typography>
 					<Typography
