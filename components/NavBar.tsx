@@ -79,11 +79,8 @@ function NavBar() {
 								display: { xs: "block", md: "none" },
 							}}
 						>
-							<MenuItem sx={{ mr: 2 }}>
+							<MenuItem>
 								<Link href="/about">About</Link>
-							</MenuItem>
-							<MenuItem onClick={handleCloseNavMenu}>
-								<Link href="/recipe-history">Recipe History</Link>
 							</MenuItem>
 						</Menu>
 					</Box>
@@ -110,7 +107,7 @@ function NavBar() {
 						<Link
 							href="/about"
 							style={{
-								margin: "0 28px",
+								marginLeft: "18px",
 								color: "white",
 								textTransform: "uppercase",
 								textDecoration: "none",
@@ -119,18 +116,6 @@ function NavBar() {
 							}}
 						>
 							About
-						</Link>
-						<Link
-							href="/recipe-history"
-							style={{
-								color: "white",
-								textTransform: "uppercase",
-								textDecoration: "none",
-								fontWeight: "bold",
-								letterSpacing: "2px",
-							}}
-						>
-							Recipe History
 						</Link>
 					</Box>
 				</Toolbar>
