@@ -22,13 +22,14 @@ const RecipePage = () => {
 	// once param isn't undefined we can get the path
 	React.useEffect(() => {
 		if (url) {
-			setIsMeal(convertURLToMealString(url as string));
-			fetchRecipe();
+			const mealStr = convertURLToMealString(url as string);
+			setIsMeal(mealStr);
+			generateRecipe(mealStr);
 		}
 	}, [url]);
 
 	// handles form submission and response from server
-	const fetchRecipe = async () => {
+	const generateRecipe = async (meal) => {
 		setIsLoading(true);
 
 		// TODO: should likely cache duplicate requests (SWR?)
