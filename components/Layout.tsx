@@ -17,7 +17,6 @@ type Props = {
 const Layout = ({ children, title = "AiGrub" }: Props) => {
 	return (
 		<React.Fragment>
-			<CssBaseline />
 			<Box
 				style={{
 					position: "relative",
