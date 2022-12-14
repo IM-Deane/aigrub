@@ -12,7 +12,7 @@ const AboutPage = () => (
 		<Grid container spacing={3} sx={{ my: 4 }}>
 			<Grid item md={5} xs={12}>
 				<Typography component="h1" variant="h4" gutterBottom>
-					About
+					About the app
 				</Typography>
 				<Typography paragraph gutterBottom>
 					Hi there 👋🏾, my name's Tristan, and I'm the creator of AiGrub.
