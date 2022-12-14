@@ -1,10 +1,11 @@
 import * as React from "react";
 
+import Link from "@mui/material/Link";
+
 import { useRouter } from "next/router";
 
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
 import Layout from "../../components/Layout";
@@ -73,9 +74,11 @@ const RecipePage = () => {
 					>
 						{meal}
 					</Typography>
-					<Typography component="h2" variant="h5">
-						Recipe:
-					</Typography>
+					<Box>
+						<Link href="/" color="secondary">
+							Go back home
+						</Link>
+					</Box>
 					<p style={{ whiteSpace: "pre-line" }}>{recipe}</p>
 				</Box>
 			)}
