@@ -25,13 +25,13 @@ These are the minimum required features before releasing the application.
 1. Clone the project to your computer
 
 ```
-git clone git@github.com:IM-Deane/what-should-I-eat-tonight.git
+git clone git@github.com:IM-Deane/aigrub.git
 ```
 
 2. Navigate to the project folder and install dependencies
 
 ```
-cd what-should-I-eat-tonight && npm install
+cd aigrub && npm install
 ```
 
 3. Run the project
