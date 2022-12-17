@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import Image from "next/image";
+
 import Link from "@mui/material/Link";
 
 import { useRouter } from "next/router";
@@ -14,7 +16,9 @@ import { convertURLToMealString } from "../../utils";
 
 const RecipePage = () => {
 	const [isLoading, setIsLoading] = React.useState(false);
-	const [meal, setIsMeal] = React.useState("");
+	const [isImgLoading, setIsImgLoading] = React.useState(false);
+	const [meal, setMeal] = React.useState("");
+	const [mealImageURL, setMealImageURL] = React.useState("");
 	const [recipe, setRecipe] = React.useState("");
 
 	const router = useRouter();
@@ -24,10 +28,34 @@ const RecipePage = () => {
 	React.useEffect(() => {
 		if (url) {
 			const mealStr = convertURLToMealString(url as string);
-			setIsMeal(mealStr);
+			setMeal(mealStr);
 			generateRecipe(mealStr);
+			generateMealImage(mealStr);
 		}
 	}, [url]);
+
+	// create an image using the meal name as a prompt
+	const generateMealImage = async (meal) => {
+		setIsImgLoading(true);
+
+		// TODO: should likely cache duplicate requests (SWR?)
+		try {
+			const response = await fetch("/api/generate/image", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ meal: meal }),
+			});
+			const { result } = await response.json();
+			console.log(result);
+			setMealImageURL(result);
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setIsImgLoading(false);
+		}
+	};
 
 	// handles form submission and response from server
 	const generateRecipe = async (meal) => {
@@ -66,6 +94,11 @@ const RecipePage = () => {
 				</Box>
 			) : (
 				<Box sx={{ my: 3 }}>
+					{isImgLoading ? (
+						<CircularProgress color="secondary" />
+					) : (
+						<Image src={mealImageURL} alt={meal} width="512" height="512" />
+					)}
 					<Typography
 						component="h1"
 						variant="h4"
