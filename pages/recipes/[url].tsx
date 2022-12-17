@@ -48,7 +48,6 @@ const RecipePage = () => {
 				body: JSON.stringify({ meal: meal }),
 			});
 			const { result } = await response.json();
-			console.log(result);
 			setMealImageURL(result);
 		} catch (error) {
 			console.log(error);
