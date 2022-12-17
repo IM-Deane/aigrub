@@ -56,23 +56,14 @@ const IndexPage = () => {
 						to your liking. Whether you're looking for a quick meal or a tasty
 						treat, AiGrub will help you find the perfect recipe.
 					</Typography>
-
-					<Typography variant="body1" paragraph gutterBottom>
-						With our AI-fueled service, you can save time and enjoy delicious
-						recipes with ease. Try AiGrub today and enjoy tasty recipes with the
-						power of AI!
-					</Typography>
-
 					<Typography variant="h4" paragraph gutterBottom>
 						How it works:
 					</Typography>
-
 					<Typography variant="body1" paragraph gutterBottom>
 						Simply enter the dietary preference or ingredients you like (or
 						don't) and let our AI do the rest – it’ll suggest recipes that are
 						tailored to your tastes.
 					</Typography>
-
 					<Typography variant="body1" paragraph>
 						Save time, have fun and make the most of your cooking with AIGrub.
 					</Typography>
