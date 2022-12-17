@@ -1,5 +1,4 @@
 import { Configuration, OpenAIApi } from "openai";
-import { generateMealsPrompt } from "../../../utils/prompts";
 
 const configuration = new Configuration({
 	apiKey: process.env.OPENAI_API_KEY,
