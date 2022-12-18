@@ -34,7 +34,20 @@ git clone git@github.com:IM-Deane/aigrub.git
 cd aigrub && npm install
 ```
 
-3. Run the project
+3. Create an .env.local file from .env.example
+
+```
+cp .env.example .env.locall
+```
+
+4. If this is an existing project you will need to get the secret key from
+   another developer. If the project is new, you can generate a secret key by
+   signing up for an account at [OpenAi](https://beta.openai.com/signup) and
+   going [here](https://beta.openai.com/docs/quickstart/add-your-api-key). NOTE:
+   Without this key your requests will fail and the project won't work.
+
+5. After setting installing the dependencies and setting up your local
+   environment, you can run the project with:
 
 ```
 npm run dev

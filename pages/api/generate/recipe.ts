@@ -19,6 +19,6 @@ export default async function handler(req, res) {
 			frequency_penalty: 0,
 			presence_penalty: 0,
 		});
-		res.status(200).json({ result: completion.data.choices[0].text });
+		res.status(201).json({ result: completion.data.choices[0].text });
 	}
 }
