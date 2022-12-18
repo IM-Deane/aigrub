@@ -67,16 +67,15 @@ const MealForm = ({ handleMeals, starterMeals }) => {
 	return (
 		<Box style={{ width: "100%" }}>
 			<Stack direction="row" spacing={1} sx={{ minHeight: "32px" }}>
-				{dietPreferences.length > 0 &&
-					dietPreferences.map((pref) => (
-						<Chip
-							key={pref.key}
-							label={pref.label}
-							color="success"
-							variant="outlined"
-							onDelete={() => handleDeletePref(pref)}
-						/>
-					))}
+				{dietPreferences?.map((pref) => (
+					<Chip
+						key={pref.key}
+						label={pref.label}
+						color="success"
+						variant="outlined"
+						onDelete={() => handleDeletePref(pref)}
+					/>
+				))}
 			</Stack>
 			<form style={{ marginTop: "34px" }}>
 				<div>

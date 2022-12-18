@@ -50,9 +50,11 @@ function TabPanel(props: TabPanelProps) {
 	);
 }
 
-export default function MealTypeTabs({ handleMeals }) {
+export default function MealTypeTabs({ handleMeals, initialRandomKeywords }) {
 	const [currentTab, setCurrentTab] = React.useState(0);
-	const [randomKeywords, setRandomKeywords] = React.useState([]);
+	const [randomKeywords, setRandomKeywords] = React.useState(
+		initialRandomKeywords
+	);
 
 	// handles changes to meal type tabs
 	const handleTabChange = (event: React.SyntheticEvent, newTab: number) => {
@@ -62,12 +64,6 @@ export default function MealTypeTabs({ handleMeals }) {
 		}
 		setCurrentTab(newTab);
 	};
-
-	React.useEffect(() => {
-		// set keywords after page load to avoid hydration error
-		setRandomKeywords(getRandomListOfKeywords());
-	}, []);
-	console.log(randomKeywords);
 
 	return (
 		<Box sx={{ width: "100%" }}>

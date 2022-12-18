@@ -7,9 +7,23 @@ import Typography from "@mui/material/Typography";
 import Layout from "../components/Layout";
 import MealTypeTabs from "../components/MealTypeTabs";
 
-import { cleanMealData, convertMealStringToURL } from "../utils";
+import {
+	cleanMealData,
+	convertMealStringToURL,
+	getRandomListOfKeywords,
+} from "../utils";
 
-const IndexPage = () => {
+export async function getStaticProps() {
+	return {
+		props: {
+			// Note: had to get keywords here before page load due to react hydration BS.
+			// Even useEffect with dependencies array wasn't working :(
+			initialRandomKeywords: getRandomListOfKeywords(),
+		},
+	};
+}
+
+const IndexPage = ({ initialRandomKeywords }) => {
 	const [meals, setMeals] = useState([]);
 
 	const handleMeals = (mealData) => {
@@ -67,7 +81,10 @@ const IndexPage = () => {
 					</Typography>
 				</Grid>
 				<Grid item md={6} xs={12}>
-					<MealTypeTabs handleMeals={handleMeals} />
+					<MealTypeTabs
+						initialRandomKeywords={initialRandomKeywords}
+						handleMeals={handleMeals}
+					/>
 				</Grid>
 				{/* render meal list if it exists */}
 				<Grid item xs={12}>
