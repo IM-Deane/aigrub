@@ -79,7 +79,6 @@ export default function MealTypeTabs({ handleMeals, initialRandomKeywords }) {
 					allowScrollButtonsMobile
 					textColor="secondary"
 					indicatorColor="secondary"
-					aria-label="Meal type tabs"
 				>
 					{mealTabs().map(({ key, label }) => (
 						<Tab value={key} label={label} />
