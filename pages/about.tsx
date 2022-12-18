@@ -27,7 +27,7 @@ const AboutPage = () => (
 							color="primary"
 							target="_blank"
 						>
-							OpenAi's 's ChatGPT-3
+							OpenAi's ChatGPT-3
 						</Link>{" "}
 						took the world by storm in December 2022, I decided to see what all
 						the fuss was about.
