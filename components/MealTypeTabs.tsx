@@ -77,8 +77,8 @@ export default function MealTypeTabs({ handleMeals, initialRandomKeywords }) {
 					variant="scrollable"
 					scrollButtons="auto"
 					allowScrollButtonsMobile
-					textColor="secondary"
-					indicatorColor="secondary"
+					textColor="primary"
+					indicatorColor="primary"
 				>
 					{mealTabs().map(({ key, label }) => (
 						<Tab value={key} label={label} />
