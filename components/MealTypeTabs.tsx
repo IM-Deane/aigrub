@@ -70,12 +70,12 @@ export default function MealTypeTabs({ handleMeals, initialRandomKeywords }) {
 			<Typography component="h3" variant="h6" gutterBottom>
 				Meal categories:
 			</Typography>
-			<Box sx={{ borderBottom: 1, borderColor: "divider", width: "71%" }}>
+			<Box sx={{ borderBottom: 1, borderColor: "divider", width: "75%" }}>
 				<Tabs
 					value={currentTab}
 					onChange={handleTabChange}
-					textColor="secondary"
-					indicatorColor="secondary"
+					textColor="primary"
+					indicatorColor="primary"
 					aria-label="Meal type tabs"
 				>
 					{mealTabs().map(({ key, label }) => (
