@@ -1,11 +1,13 @@
 import { useState } from "react";
 
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 
 import Layout from "../components/Layout";
 import MealTypeTabs from "../components/MealTypeTabs";
+import Robby from "../components/Robby";
 
 import {
 	cleanMealData,
@@ -42,13 +44,6 @@ const IndexPage = ({ initialRandomKeywords }) => {
 						sx={{ display: "flex", alignItems: "center" }}
 					>
 						AiGrub
-						<span>
-							<img
-								src="/images/logo.png"
-								alt="AiGrub logo"
-								style={{ width: "48px", height: "48px", marginLeft: "10px" }}
-							/>
-						</span>
 					</Typography>
 					<Typography
 						component="small"
@@ -77,7 +72,8 @@ const IndexPage = ({ initialRandomKeywords }) => {
 						tailored to your tastes.
 					</Typography>
 					<Typography variant="body1" paragraph>
-						Save time, have fun and make the most of your cooking with AIGrub.
+						Don't feel like typing? Then the premade food categories might be
+						right up your alley.
 					</Typography>
 				</Grid>
 				<Grid item md={6} xs={12}>
@@ -91,18 +87,28 @@ const IndexPage = ({ initialRandomKeywords }) => {
 					<Typography component="h4" variant="h4">
 						Meal ideas:
 					</Typography>
-					<ul style={{ marginBottom: "8px", minHeight: "75px" }}>
-						{meals.map((meal, index) => (
-							<li key={index}>
-								<Link
-									href={`/recipes/${convertMealStringToURL(meal)}`}
-									color="secondary"
-								>
-									{meal}
-								</Link>
-							</li>
-						))}
-					</ul>
+					{meals.length > 0 ? (
+						<ul style={{ marginBottom: "8px", minHeight: "75px" }}>
+							{meals.map((meal, index) => (
+								<li key={index}>
+									<Link
+										href={`/recipes/${convertMealStringToURL(meal)}`}
+										color="secondary"
+									>
+										{meal}
+									</Link>
+								</li>
+							))}
+						</ul>
+					) : (
+						<Box sx={{ p: 3 }}>
+							<Robby
+								title="Nothing to see here...You tryna eat or nah fleshbag?"
+								placement="top-end"
+								fontSize="large"
+							/>
+						</Box>
+					)}
 				</Grid>
 			</Grid>
 		</Layout>

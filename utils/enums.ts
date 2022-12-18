@@ -64,13 +64,13 @@ export const premadeMealTypes = {
 	],
 	lunch: [
 		{
-			key: 2,
+			key: 3,
 			label: "lunch",
 		},
 	],
 	dinner: [
 		{
-			key: 2,
+			key: 4,
 			label: "dinner",
 		},
 	],
