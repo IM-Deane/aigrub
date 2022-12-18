@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
 import Layout from "../../components/Layout";
@@ -93,25 +94,27 @@ const RecipePage = () => {
 				</Box>
 			) : (
 				<Box sx={{ my: 3 }}>
-					{isImgLoading ? (
-						<CircularProgress color="secondary" />
-					) : (
-						<Image src={mealImageURL} alt={meal} width="512" height="512" />
-					)}
-					<Typography
-						component="h1"
-						variant="h4"
-						style={{ textTransform: "capitalize" }}
-						gutterBottom
-					>
-						{meal}
-					</Typography>
-					<Box>
-						<Link href="/" color="secondary">
-							Go back home
-						</Link>
-					</Box>
-					<p style={{ whiteSpace: "pre-line" }}>{recipe}</p>
+					<Paper elevation={16} sx={{ p: 2 }}>
+						{isImgLoading ? (
+							<CircularProgress color="secondary" />
+						) : (
+							<Image src={mealImageURL} alt={meal} width="512" height="512" />
+						)}
+						<Typography
+							component="h1"
+							variant="h4"
+							style={{ textTransform: "capitalize" }}
+							gutterBottom
+						>
+							{meal}
+						</Typography>
+						<Box>
+							<Link href="/" color="primary">
+								Go back home
+							</Link>
+						</Box>
+						<p style={{ whiteSpace: "pre-line" }}>{recipe}</p>
+					</Paper>
 				</Box>
 			)}
 		</Layout>
