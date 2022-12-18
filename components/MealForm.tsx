@@ -66,7 +66,11 @@ const MealForm = ({ handleMeals, starterMeals }) => {
 
 	return (
 		<Box style={{ width: "100%" }}>
-			<Stack direction="row" spacing={1} sx={{ minHeight: "32px" }}>
+			<Stack
+				direction={{ xs: "column", sm: "row" }}
+				spacing={{ xs: 2, sm: 1 }}
+				sx={{ minHeight: "32px" }}
+			>
 				{dietPreferences?.map((pref) => (
 					<Chip
 						key={pref.key}

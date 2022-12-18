@@ -70,10 +70,13 @@ export default function MealTypeTabs({ handleMeals, initialRandomKeywords }) {
 			<Typography component="h3" variant="h6" gutterBottom>
 				Meal categories:
 			</Typography>
-			<Box sx={{ borderBottom: 1, borderColor: "divider", width: "71%" }}>
+			<Box sx={{ borderBottom: 1, borderColor: "divider", width: "100%" }}>
 				<Tabs
 					value={currentTab}
 					onChange={handleTabChange}
+					variant="scrollable"
+					scrollButtons="auto"
+					allowScrollButtonsMobile
 					textColor="secondary"
 					indicatorColor="secondary"
 					aria-label="Meal type tabs"
