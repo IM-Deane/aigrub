@@ -33,7 +33,7 @@ export default function AppFooter() {
 			component="footer"
 			sx={{
 				display: "flex",
-				bgcolor: "primary",
+				bgcolor: "secondary.dark",
 				position: "absolute",
 				bottom: 0,
 				width: "100%",
