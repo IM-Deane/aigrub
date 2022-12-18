@@ -1,23 +1,14 @@
 import * as React from "react";
 
+import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
 
-const RecipeForm = ({ handleMeals }) => {
+const MealForm = ({ handleMeals, starterMeals }) => {
 	// starting tags that can provide users with inspiration
-	const [dietPreferences, setDietPreferences] = React.useState([
-		{
-			key: 0,
-			label: "simple",
-		},
-		{
-			key: 1,
-			label: "no onions",
-		},
-	]);
+	const [dietPreferences, setDietPreferences] = React.useState(starterMeals);
 	const [newPreference, setNewPref] = React.useState("");
 	const [isLoading, setIsLoading] = React.useState(false);
 
@@ -74,20 +65,18 @@ const RecipeForm = ({ handleMeals }) => {
 	};
 
 	return (
-		<div style={{ width: "100%" }}>
-			<Typography variant="subtitle2" paragraph gutterBottom>
-				Here are some ideas to get you started:
-			</Typography>
+		<Box style={{ width: "100%" }}>
 			<Stack direction="row" spacing={1} sx={{ minHeight: "32px" }}>
-				{dietPreferences.map((pref) => (
-					<Chip
-						key={pref.key}
-						label={pref.label}
-						color="success"
-						variant="outlined"
-						onDelete={() => handleDeletePref(pref)}
-					/>
-				))}
+				{dietPreferences.length > 0 &&
+					dietPreferences.map((pref) => (
+						<Chip
+							key={pref.key}
+							label={pref.label}
+							color="success"
+							variant="outlined"
+							onDelete={() => handleDeletePref(pref)}
+						/>
+					))}
 			</Stack>
 			<form style={{ marginTop: "34px" }}>
 				<div>
@@ -115,8 +104,8 @@ const RecipeForm = ({ handleMeals }) => {
 					Generate Recipes
 				</LoadingButton>
 			</form>
-		</div>
+		</Box>
 	);
 };
 
-export default RecipeForm;
+export default MealForm;

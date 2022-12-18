@@ -4,10 +4,8 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 
-import SmartToyIcon from "@mui/icons-material/SmartToy";
-
 import Layout from "../components/Layout";
-import RecipeForm from "../components/RecipeForm";
+import MealTypeTabs from "../components/MealTypeTabs";
 
 import { cleanMealData, convertMealStringToURL } from "../utils";
 
@@ -69,7 +67,7 @@ const IndexPage = () => {
 					</Typography>
 				</Grid>
 				<Grid item md={6} xs={12}>
-					<RecipeForm handleMeals={handleMeals} />
+					<MealTypeTabs handleMeals={handleMeals} />
 				</Grid>
 				{/* render meal list if it exists */}
 				<Grid item xs={12}>
