@@ -6,6 +6,9 @@ import Link from "@mui/material/Link";
 
 import { useRouter } from "next/router";
 
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Paper from "@mui/material/Paper";
@@ -16,12 +19,16 @@ import Layout from "../../components/Layout";
 import { convertURLToMealString } from "../../utils";
 
 const RecipePage = () => {
+	// state
 	const [isLoading, setIsLoading] = React.useState(false);
 	const [isImgLoading, setIsImgLoading] = React.useState(false);
 	const [meal, setMeal] = React.useState("");
 	const [mealImageURL, setMealImageURL] = React.useState("");
 	const [recipe, setRecipe] = React.useState("");
 
+	// hooks
+	const theme = useTheme();
+	const matchesMobile = useMediaQuery(theme.breakpoints.down("sm"));
 	const router = useRouter();
 	const { url } = router.query;
 
@@ -98,7 +105,12 @@ const RecipePage = () => {
 						{isImgLoading ? (
 							<CircularProgress color="secondary" />
 						) : (
-							<Image src={mealImageURL} alt={meal} width="512" height="512" />
+							<Image
+								src={mealImageURL}
+								alt={meal}
+								width={matchesMobile ? "256" : "512"}
+								height={matchesMobile ? "256" : "512"}
+							/>
 						)}
 						<Typography
 							component="h1"
