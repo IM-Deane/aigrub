@@ -80,7 +80,14 @@ function NavBar() {
 							}}
 						>
 							<MenuItem>
-								<Link href="/about">About</Link>
+								<Link href="/" passHref legacyBehavior>
+									<a style={{ color: "white" }}>Home</a>
+								</Link>
+							</MenuItem>
+							<MenuItem>
+								<Link href="/about" passHref legacyBehavior>
+									<a style={{ color: "white" }}>About</a>
+								</Link>
 							</MenuItem>
 						</Menu>
 					</Box>
