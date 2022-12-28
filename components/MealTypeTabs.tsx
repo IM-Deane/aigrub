@@ -12,18 +12,22 @@ import { premadeMealTypes } from "../utils/enums";
 const mealTabs = () => [
 	{
 		key: 0,
-		label: "Random",
+		label: "Main",
 	},
 	{
 		key: 1,
-		label: "Breakfast",
+		label: "Random",
 	},
 	{
 		key: 2,
-		label: "Lunch",
+		label: "Breakfast",
 	},
 	{
 		key: 3,
+		label: "Lunch",
+	},
+	{
+		key: 4,
 		label: "Dinner",
 	},
 ];
@@ -90,23 +94,30 @@ export default function MealTypeTabs({ handleMeals, initialRandomKeywords }) {
 			<TabPanel value={currentTab} index={0}>
 				<MealForm
 					handleMeals={handleMeals}
-					// random keywords
-					starterMeals={randomKeywords}
+					// no keywords
+					starterMeals={[]}
 				/>
 			</TabPanel>
 			<TabPanel value={currentTab} index={1}>
 				<MealForm
 					handleMeals={handleMeals}
-					starterMeals={premadeMealTypes.breakfast}
+					// random keywords
+					starterMeals={randomKeywords}
 				/>
 			</TabPanel>
 			<TabPanel value={currentTab} index={2}>
 				<MealForm
 					handleMeals={handleMeals}
-					starterMeals={premadeMealTypes.lunch}
+					starterMeals={premadeMealTypes.breakfast}
 				/>
 			</TabPanel>
 			<TabPanel value={currentTab} index={3}>
+				<MealForm
+					handleMeals={handleMeals}
+					starterMeals={premadeMealTypes.lunch}
+				/>
+			</TabPanel>
+			<TabPanel value={currentTab} index={4}>
 				<MealForm
 					handleMeals={handleMeals}
 					starterMeals={premadeMealTypes.dinner}
