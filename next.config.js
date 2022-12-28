@@ -5,7 +5,6 @@ module.exports = {
 			{
 				protocol: "https",
 				hostname: "oaidalleapiprodscus.blob.core.windows.net",
-				port: "",
 				pathname: "/**",
 			},
 		],
