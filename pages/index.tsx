@@ -103,7 +103,7 @@ const IndexPage = ({ initialRandomKeywords }) => {
 								{isLoading ? (
 									<Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}>
 										<Typography component="h4" variant="h5">
-											Tasty recipe incoming...
+											Sit tight, tastiness is on the way...
 										</Typography>
 										<LinearProgress color="primary" />
 									</Stack>
