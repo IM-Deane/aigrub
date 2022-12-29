@@ -3,6 +3,7 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
+import LinearProgress from "@mui/material/LinearProgress";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
@@ -15,6 +16,7 @@ import {
 	convertMealStringToURL,
 	getRandomListOfKeywords,
 } from "../utils";
+import Stack from "@mui/material/Stack";
 
 export async function getStaticProps() {
 	return {
@@ -28,6 +30,7 @@ export async function getStaticProps() {
 
 const IndexPage = ({ initialRandomKeywords }) => {
 	const [meals, setMeals] = useState([]);
+	const [isLoading, setLoading] = useState(false);
 
 	const handleMeals = (mealData) => {
 		// get formatted list of meals in alphabetical order
@@ -76,8 +79,7 @@ const IndexPage = ({ initialRandomKeywords }) => {
 							tailored to your tastes.
 						</Typography>
 						<Typography variant="body1" paragraph>
-							Don't feel like typing? Then the premade food categories might be
-							right up your alley.
+							Don't feel like typing? Try the premade food categories!
 						</Typography>
 					</Paper>
 				</Grid>
@@ -86,10 +88,11 @@ const IndexPage = ({ initialRandomKeywords }) => {
 						<MealTypeTabs
 							initialRandomKeywords={initialRandomKeywords}
 							handleMeals={handleMeals}
+							isDisabled={isLoading} // used to disable submit button
 						/>
 					</Paper>
 				</Grid>
-				{/* render meal list if it exists */}
+				{/* Meal list section */}
 				<Grid item xs={12}>
 					<Paper elevation={16} sx={{ p: 2 }}>
 						<Typography component="h4" variant="h4">
@@ -97,16 +100,29 @@ const IndexPage = ({ initialRandomKeywords }) => {
 						</Typography>
 						{meals.length > 0 ? (
 							<ul style={{ marginBottom: "8px", minHeight: "75px" }}>
-								{meals.map((meal, index) => (
-									<li key={index}>
-										<Link
-											href={`/recipes/${convertMealStringToURL(meal)}`}
-											color="primary"
-										>
-											{meal}
-										</Link>
-									</li>
-								))}
+								{isLoading ? (
+									<Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}>
+										<Typography component="h4" variant="h5">
+											Sit tight, tastiness is on the way...
+										</Typography>
+										<LinearProgress color="primary" />
+									</Stack>
+								) : (
+									meals.map((meal, index) => (
+										<li key={index}>
+											<Link
+												onClick={() => {
+													// activate recipe loading state
+													setLoading(true);
+												}}
+												href={`/recipes/${convertMealStringToURL(meal)}`}
+												color="primary"
+											>
+												{meal}
+											</Link>
+										</li>
+									))
+								)}
 							</ul>
 						) : (
 							<Box sx={{ p: 3 }}>

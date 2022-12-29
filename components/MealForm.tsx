@@ -6,20 +6,68 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 
-const MealForm = ({ handleMeals, starterMeals }) => {
+const defaultErrorState = {
+	blankInput: "",
+	minLength: "",
+};
+
+const MealForm = ({ handleMeals, starterMeals, isDisabled = false }) => {
 	// starting tags that can provide users with inspiration
 	const [dietPreferences, setDietPreferences] = React.useState(starterMeals);
 	const [newPreference, setNewPref] = React.useState("");
 	const [isLoading, setIsLoading] = React.useState(false);
+	const [errors, setErrors] = React.useState({
+		blankInput: "",
+		minLength: "",
+	});
 
+	const isDisabledInput = () => {
+		if (isDisabled) {
+			return true;
+		} else if (dietPreferences.length === 0) {
+			return true;
+		} else if (!newPreference) {
+			return false;
+		} else {
+			return false;
+		}
+	};
+
+	// handles changes to text field input
+	// also resets error fields if present
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { value } = e.target;
+		const charLength = value.length;
+
+		if (charLength > 0 && errors.blankInput) {
+			// reset blank input error
+			setErrors({ ...errors, blankInput: "" });
+		} else if (charLength >= 3) {
+			// can just reset error state
+			setErrors(defaultErrorState);
+		}
+
 		setNewPref(e.target.value);
 	};
 
+	// adds valid preferences to the list
 	const handleAddPref = (e) => {
 		e.preventDefault();
 
-		if (newPreference === "") return;
+		// VALIDATION: don't add if blank or too short
+		if (!newPreference) {
+			setErrors({
+				...errors,
+				blankInput: "Option cannot be empty.",
+			});
+			return;
+		} else if (newPreference.length < 3) {
+			setErrors({
+				...errors,
+				minLength: "Option must be at least 3 characters long",
+			});
+			return;
+		}
 
 		setDietPreferences([
 			...dietPreferences,
@@ -44,8 +92,6 @@ const MealForm = ({ handleMeals, starterMeals }) => {
 		e.preventDefault();
 
 		setIsLoading(true);
-
-		// TODO: should likely cache duplicate requests (SWR?)
 		try {
 			const response = await fetch("/api/generate/meals", {
 				method: "POST",
@@ -91,11 +137,17 @@ const MealForm = ({ handleMeals, starterMeals }) => {
 						fullWidth
 						placeholder="eg. gluten-free"
 						onChange={handleChange}
+						// TODO: should I add an actual button as well?
+						// https://mui.com/material-ui/react-text-field/#input-adornments
 						// if enter is pressed we add current value to preferences
 						onKeyPress={(e) => e.key === "Enter" && handleAddPref(e)}
+						inputProps={{ maxLength: 20 }}
+						error={Boolean(errors.blankInput) || Boolean(errors.minLength)}
+						helperText={errors.blankInput || errors.minLength || ""}
 					/>
 				</div>
 				<LoadingButton
+					disabled={isDisabledInput()}
 					loading={isLoading}
 					variant="contained"
 					fullWidth
