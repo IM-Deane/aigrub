@@ -10,11 +10,7 @@ import EmojiFoodBeverageIcon from "@mui/icons-material/EmojiFoodBeverage";
 function Copyright() {
 	return (
 		<Fragment>
-			Made with{" "}
-			<span>
-				(<EmojiFoodBeverageIcon sx={{ fontSize: "10px" }} /> + &hearts;){" "}
-			</span>{" "}
-			by{" "}
+			Made with <span>&hearts; </span> by{" "}
 			<Link
 				color="inherit"
 				href="https://tristandeane.ca"

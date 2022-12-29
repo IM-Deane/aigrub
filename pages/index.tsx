@@ -92,7 +92,7 @@ const IndexPage = ({ initialRandomKeywords }) => {
 						/>
 					</Paper>
 				</Grid>
-				{/* render meal list if it exists */}
+				{/* Meal list section */}
 				<Grid item xs={12}>
 					<Paper elevation={16} sx={{ p: 2 }}>
 						<Typography component="h4" variant="h4">
@@ -103,7 +103,7 @@ const IndexPage = ({ initialRandomKeywords }) => {
 								{isLoading ? (
 									<Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}>
 										<Typography component="h4" variant="h5">
-											Sit tight while we think of a tasty recipe...
+											Tasty recipe incoming...
 										</Typography>
 										<LinearProgress color="primary" />
 									</Stack>
@@ -112,7 +112,7 @@ const IndexPage = ({ initialRandomKeywords }) => {
 										<li key={index}>
 											<Link
 												onClick={() => {
-													// re
+													// activate recipe loading state
 													setLoading(true);
 												}}
 												href={`/recipes/${convertMealStringToURL(meal)}`}
