@@ -35,6 +35,7 @@ function NavBar() {
 								alt="AiGrub logo"
 								width={80}
 								height={80}
+								priority
 							/>
 						</Link>
 					</Box>

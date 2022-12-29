@@ -6,7 +6,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 
-const MealForm = ({ handleMeals, starterMeals }) => {
+const MealForm = ({ handleMeals, starterMeals, isDisabled = false }) => {
 	// starting tags that can provide users with inspiration
 	const [dietPreferences, setDietPreferences] = React.useState(starterMeals);
 	const [newPreference, setNewPref] = React.useState("");
@@ -96,6 +96,7 @@ const MealForm = ({ handleMeals, starterMeals }) => {
 					/>
 				</div>
 				<LoadingButton
+					disabled={isDisabled} // parent can disable when needed
 					loading={isLoading}
 					variant="contained"
 					fullWidth

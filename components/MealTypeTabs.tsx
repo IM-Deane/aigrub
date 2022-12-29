@@ -54,7 +54,11 @@ function TabPanel(props: TabPanelProps) {
 	);
 }
 
-export default function MealTypeTabs({ handleMeals, initialRandomKeywords }) {
+export default function MealTypeTabs({
+	handleMeals,
+	initialRandomKeywords,
+	isDisabled,
+}) {
 	const [currentTab, setCurrentTab] = React.useState(0);
 	const [randomKeywords, setRandomKeywords] = React.useState(
 		initialRandomKeywords
@@ -96,6 +100,7 @@ export default function MealTypeTabs({ handleMeals, initialRandomKeywords }) {
 					handleMeals={handleMeals}
 					// no keywords
 					starterMeals={[]}
+					isDisabled={isDisabled}
 				/>
 			</TabPanel>
 			<TabPanel value={currentTab} index={1}>
@@ -103,24 +108,28 @@ export default function MealTypeTabs({ handleMeals, initialRandomKeywords }) {
 					handleMeals={handleMeals}
 					// random keywords
 					starterMeals={randomKeywords}
+					isDisabled={isDisabled}
 				/>
 			</TabPanel>
 			<TabPanel value={currentTab} index={2}>
 				<MealForm
 					handleMeals={handleMeals}
 					starterMeals={premadeMealTypes.breakfast}
+					isDisabled={isDisabled}
 				/>
 			</TabPanel>
 			<TabPanel value={currentTab} index={3}>
 				<MealForm
 					handleMeals={handleMeals}
 					starterMeals={premadeMealTypes.lunch}
+					isDisabled={isDisabled}
 				/>
 			</TabPanel>
 			<TabPanel value={currentTab} index={4}>
 				<MealForm
 					handleMeals={handleMeals}
 					starterMeals={premadeMealTypes.dinner}
+					isDisabled={isDisabled}
 				/>
 			</TabPanel>
 		</Box>
