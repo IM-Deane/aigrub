@@ -1,44 +1,66 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // for parsing cookies on server
 import ServerCookies from "cookies";
-
-import openai from "../../utils/openai";
+import ClientCookies from "js-cookie";
 
 import Image from "next/image";
 
-import Link from "@mui/material/Link";
+import { getMealImageClient, getRecipe } from "../../api";
+
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
 import Layout from "../../components/Layout";
 
-import { MealType } from "../../interfaces";
-
 import { convertURLToMealString } from "../../utils";
-import { generateRecipePrompt } from "../../utils/prompts";
 
-const RecipePage = ({ mealData }) => {
-	const [meal] = useState(mealData);
+const RecipePage = ({ meal, resolvedUrl }) => {
+	const [imageURL, setImageURL] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
 	const theme = useTheme();
 	const matchesMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+	// get meal image
+	useEffect(() => {
+		if (ClientCookies.get("imageURL")) {
+			// get image url from cache
+			setImageURL(ClientCookies.get("imageURL"));
+		} else {
+			// fetch and cache meal image
+			setIsLoading(true);
+			getMealImageClient(meal.name)
+				.then(({ data }) => {
+					setImageURL(data);
+					ClientCookies.set("imageURL", data, { path: resolvedUrl });
+				})
+				.catch((err) => console.log(err))
+				.finally(() => setIsLoading(false));
+		}
+	}, []);
+
 	return (
-		<Layout title={`${meal.name ? meal.name : "Meal"} | AiGrub`}>
+		<Layout title={`${meal.name || "Meal"} | AiGrub`}>
 			<Box sx={{ my: 3 }}>
 				<Paper elevation={16} sx={{ p: 2 }}>
-					<Image
-						src={meal.imageURL}
-						alt={meal.name}
-						width={matchesMobile ? "256" : "512"}
-						height={matchesMobile ? "256" : "512"}
-						priority
-					/>
+					{isLoading ? (
+						<CircularProgress color="primary" />
+					) : (
+						<Image
+							src={imageURL}
+							alt={meal.name}
+							width={matchesMobile ? "256" : "512"}
+							height={matchesMobile ? "256" : "512"}
+							priority
+						/>
+					)}
 					<Typography
 						component="h1"
 						variant="h4"
@@ -66,7 +88,7 @@ export const getServerSideProps = async ({ req, res, query, resolvedUrl }) => {
 	if (serverCookie.get("meal")) {
 		// get meal data from cookie
 		return {
-			props: { mealData: JSON.parse(serverCookie.get("meal")) },
+			props: { meal: JSON.parse(serverCookie.get("meal")), resolvedUrl },
 		};
 	}
 
@@ -76,40 +98,16 @@ export const getServerSideProps = async ({ req, res, query, resolvedUrl }) => {
 	const mealStr = convertURLToMealString(query.url as string);
 
 	if (!mealStr) {
-		// return server 404
-		// TODO: redirect to custom error page instead
 		return { notFound: true };
 	}
 
-	// get meal image
-	let imageURL = "";
-	const imageResponse = await openai.createImage({
-		prompt: mealStr,
-		n: 1,
-		size: "512x512",
-	});
-	imageURL = imageResponse.data.data[0].url;
-	if (!imageURL) {
-		res.status(404).json({ error: "Image not found" });
-	}
+	const recipe = await getRecipe(mealStr);
 
-	// get recipe
-	let recipe = "";
-	const recipeRes = await openai.createCompletion({
-		model: "text-davinci-003",
-		prompt: generateRecipePrompt(mealStr),
-		temperature: 0.7,
-		max_tokens: 256,
-		top_p: 1,
-		frequency_penalty: 0,
-		presence_penalty: 0,
-	});
-	recipe = recipeRes.data.choices[0].text;
 	if (!recipe) {
-		res.status(404).json({ error: "Recipe not found!" });
+		res.status(500).send({ error: "Error creating recipe!" });
 	}
 
-	const mealData: MealType = { name: mealStr, imageURL, recipe };
+	const mealData = { name: mealStr, recipe };
 
 	// store meal data in a cookie
 	serverCookie.set("meal", JSON.stringify(mealData), {
@@ -117,7 +115,7 @@ export const getServerSideProps = async ({ req, res, query, resolvedUrl }) => {
 	});
 
 	// Pass data to the page via props
-	return { props: { mealData } };
+	return { props: { meal: mealData, resolvedUrl } };
 };
 
 export default RecipePage;
