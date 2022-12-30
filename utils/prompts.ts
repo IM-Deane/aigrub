@@ -12,5 +12,5 @@ export function generateMealsPrompt(dietPreferences): string {
 
 // create prompt for generating a recipe for the selected meal
 export function generateRecipePrompt(meal: string): string {
-	return `Create a simple recipe for this meal idea.\n\nMeal: ${meal}`;
+	return `Create a recipe that a person with average culinary skills can follow. Ensure the ingredient list and instructions are complete.\n\nRecipe: ${meal}`;
 }
