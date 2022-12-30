@@ -89,7 +89,7 @@ export default function MealTypeTabs({
 					indicatorColor="primary"
 				>
 					{mealTabs().map(({ key, label }) => (
-						<Tab value={key} label={label} />
+						<Tab key={label} value={key} label={label} />
 					))}
 				</Tabs>
 			</Box>
