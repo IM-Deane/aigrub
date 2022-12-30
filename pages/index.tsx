@@ -76,10 +76,13 @@ const IndexPage = ({ initialRandomKeywords }) => {
 						<Typography variant="body1" paragraph gutterBottom>
 							Simply enter the dietary preference or ingredients you like (or
 							don't) and let our AI do the rest – it’ll suggest recipes that are
-							tailored to your tastes.
+							tailored to the keywords you've provided.
 						</Typography>
 						<Typography variant="body1" paragraph>
-							Don't feel like typing? Try the premade food categories!
+							Don't feel like typing?
+						</Typography>
+						<Typography variant="body1" paragraph>
+							Try the premade food categories!
 						</Typography>
 					</Paper>
 				</Grid>
