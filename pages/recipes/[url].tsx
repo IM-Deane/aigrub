@@ -3,15 +3,15 @@ import { useState } from "react";
 // for parsing cookies on server
 import ServerCookies from "cookies";
 
-import openai from "../../utils/openai";
-
 import Image from "next/image";
 
-import Link from "@mui/material/Link";
+import { getMealImage, getRecipe } from "../../api";
+
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
@@ -20,16 +20,13 @@ import Layout from "../../components/Layout";
 import { MealType } from "../../interfaces";
 
 import { convertURLToMealString } from "../../utils";
-import { generateRecipePrompt } from "../../utils/prompts";
 
-const RecipePage = ({ mealData }) => {
-	const [meal] = useState(mealData);
-
+const RecipePage = ({ meal }) => {
 	const theme = useTheme();
 	const matchesMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
 	return (
-		<Layout title={`${meal.name ? meal.name : "Meal"} | AiGrub`}>
+		<Layout title={`${meal.name || "Meal"} | AiGrub`}>
 			<Box sx={{ my: 3 }}>
 				<Paper elevation={16} sx={{ p: 2 }}>
 					<Image
@@ -66,7 +63,7 @@ export const getServerSideProps = async ({ req, res, query, resolvedUrl }) => {
 	if (serverCookie.get("meal")) {
 		// get meal data from cookie
 		return {
-			props: { mealData: JSON.parse(serverCookie.get("meal")) },
+			props: { meal: JSON.parse(serverCookie.get("meal")) },
 		};
 	}
 
@@ -81,32 +78,16 @@ export const getServerSideProps = async ({ req, res, query, resolvedUrl }) => {
 		return { notFound: true };
 	}
 
-	// get meal image
-	let imageURL = "";
-	const imageResponse = await openai.createImage({
-		prompt: mealStr,
-		n: 1,
-		size: "512x512",
-	});
-	imageURL = imageResponse.data.data[0].url;
+	const imageURL = await getMealImage(mealStr);
+
 	if (!imageURL) {
-		res.status(404).json({ error: "Image not found" });
+		res.status(404).json({ error: "Error creating image!" });
 	}
 
-	// get recipe
-	let recipe = "";
-	const recipeRes = await openai.createCompletion({
-		model: "text-davinci-003",
-		prompt: generateRecipePrompt(mealStr),
-		temperature: 0.7,
-		max_tokens: 256,
-		top_p: 1,
-		frequency_penalty: 0,
-		presence_penalty: 0,
-	});
-	recipe = recipeRes.data.choices[0].text;
+	const recipe = await getRecipe(mealStr);
+
 	if (!recipe) {
-		res.status(404).json({ error: "Recipe not found!" });
+		res.status(500).json({ error: "Error creating recipe!" });
 	}
 
 	const mealData: MealType = { name: mealStr, imageURL, recipe };
@@ -117,7 +98,7 @@ export const getServerSideProps = async ({ req, res, query, resolvedUrl }) => {
 	});
 
 	// Pass data to the page via props
-	return { props: { mealData } };
+	return { props: { meal: mealData } };
 };
 
 export default RecipePage;

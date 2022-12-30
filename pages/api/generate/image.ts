@@ -1,11 +1,6 @@
-import { Configuration, OpenAIApi } from "openai";
+import openai from "../../../utils/openai";
 
-const configuration = new Configuration({
-	apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
-
-// handles creation of the meals list
+// handles creation of the meal image
 export default async function handler(req, res) {
 	if (req.method === "POST") {
 		const response = await openai.createImage({

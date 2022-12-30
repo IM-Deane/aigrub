@@ -1,15 +1,9 @@
-import { Configuration, OpenAIApi } from "openai";
+import openai from "../../../utils/openai";
 import { generateRecipePrompt } from "../../../utils/prompts";
 
-const configuration = new Configuration({
-	apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
-
-// handles creation of the meals list
+// handles creation of meal recipe
 export default async function handler(req, res) {
 	if (req.method === "POST") {
-		// FIXME: cache this request as it is being called on every page load
 		const completion = await openai.createCompletion({
 			model: "text-davinci-003",
 			prompt: generateRecipePrompt(req.body.meal),
