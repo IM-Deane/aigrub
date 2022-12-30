@@ -20,11 +20,32 @@ export async function getMeals(dietPreferences: string[]): Promise<string> {
 }
 
 /**
- * @summary generate an image of a meal using openai
+ * @summary generate an image of a meal via application API
  * @param mealName the meal being created
  * @returns string containing an Image URL
  */
-export async function getMealImage(mealName: string): Promise<string> {
+export async function getMealImageClient(mealName: string): Promise<any> {
+	try {
+		const response = await fetch("/api/generate/image", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ meal: mealName }),
+		});
+
+		if (!response.ok) throw new Error("Network response not OK");
+
+		const imageURL = await response.json();
+		return imageURL;
+	} catch (error) {
+		console.log(error);
+	}
+}
+/**
+ * @summary generate an image of a meal via openai
+ * @param mealName the meal being created
+ * @returns string containing an Image URL
+ */
+export async function getMealImageServer(mealName: string): Promise<string> {
 	const response = await openai.createImage({
 		prompt: mealName,
 		n: 1,
