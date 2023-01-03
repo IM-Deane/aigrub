@@ -44,7 +44,7 @@ const RecipePage = ({ meal, resolvedUrl }) => {
 				.catch((err) => console.log(err))
 				.finally(() => setIsLoading(false));
 		}
-	}, []);
+	}, [meal.name, resolvedUrl]);
 
 	return (
 		<Layout title={`${meal.name || "Meal"} | AiGrub`}>
