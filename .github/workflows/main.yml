@@ -2,20 +2,25 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: "ubuntu-latest"
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Cache Dependencies
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: nodeModules-${{ hashFiles('**/package-lock.json') }}
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          # Generate a new cache whenever packages or source files change.
+          key:
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{
+            hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
           restore-keys: |
-            nodeModules-
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
       - name: Setup Node 14
         uses: actions/setup-node@v2
