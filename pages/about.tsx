@@ -1,5 +1,3 @@
-import Layout from "../components/Layout";
-
 import Link from "@mui/material/Link";
 
 import Box from "@mui/material/Box";
@@ -7,7 +5,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
-import ImageGallery from "../components/ImageGallery";
+import ImageGallery from "@/components/ImageGallery";
+import Layout from "@/components/Layout";
 
 const AboutPage = () => (
 	<Layout title="About | AiGrub">
@@ -37,29 +36,17 @@ const AboutPage = () => (
 						wicked Spotify playlist, and likely too much caffeine.
 					</Typography>
 					<Typography paragraph gutterBottom>
-						If you enjoyed this app and want to say hi, please reach out to{" "}
-						<Link
-							href="mailto:contact@tristandeane.ca"
-							color="primary"
-							target="_blank"
-						>
-							contact@tristandeane.ca
-						</Link>
-						.
-					</Typography>
-					<Typography paragraph gutterBottom>
-						Otherwise, I'm always open to boosting my meager LinkedIn following
-						here:{" "}
+						Connect with me on:{" "}
 						<Link
 							href="https://www.linkedin.com/in/tristan-deane-software-developer/"
 							color="primary"
 							target="_blank"
 						>
-							My LinkedIn
+							LinkedIn
 						</Link>
 					</Typography>
 					<Typography paragraph gutterBottom>
-						Finally, you can find more of my work on my site:{" "}
+						Otherwise, you can find more of my work:{" "}
 						<Link
 							href="https://tristandeane.ca"
 							color="primary"
@@ -74,7 +61,9 @@ const AboutPage = () => (
 						Tristan
 					</Typography>
 					<Box>
-						<Link href="/">Go back home</Link>
+						<Link href="/" underline="hover">
+							&larr; Go Back
+						</Link>
 					</Box>
 				</Paper>
 			</Grid>
@@ -90,5 +79,12 @@ const AboutPage = () => (
 		</Grid>
 	</Layout>
 );
+
+export async function getStaticProps() {
+	return {
+		props: {},
+		revalidate: 3600, // Revalidate page every 1 hour
+	};
+}
 
 export default AboutPage;

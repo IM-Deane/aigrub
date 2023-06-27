@@ -1,7 +1,6 @@
-import openai from "../../../utils/openai";
-import { generateRecipePrompt } from "../../../utils/prompts";
+import openai from "@/utils/openai";
+import { generateRecipePrompt } from "@/utils/prompts";
 
-// handles creation of meal recipe
 export default async function handler(req, res) {
 	if (req.method === "POST") {
 		const completion = await openai.createCompletion({
