@@ -37,7 +37,7 @@ cd aigrub && npm install
 3. Create an .env.local file from .env.example
 
 ```
-cp .env.example .env.locall
+cp .env.example .env.local
 ```
 
 4. If this is an existing project you will need to get the secret key from
