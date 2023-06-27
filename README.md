@@ -1,22 +1,21 @@
-# AiGrub
 
-Website where users enter some dietary preferences (ie. gluten free, no
-tomatoes) and the app generates a list of meal ideas and recipes.
+<img width="824" alt="aigrub-screenshot" src="https://github.com/IM-Deane/aigrub/assets/59102133/3ce43d6c-05f0-483f-9ecf-6ad0501985c8">
 
-This is a simple straightforward web application that uses Next.js and material
-ui.
+
+## Overview
+
+A website where users enter some dietary preferences (ie. gluten-free, no
+tomatoes), and the app generates a list of meal ideas and recipes.
+
+This is a simple, straightforward web application that uses Next.js and MaterialUI.
 
 The main goal is to leverage OpenAI to generate custom/random recipes.
 
 **Current Version: 1.0.0**
 
-## MVP:
-
-These are the minimum required features before releasing the application.
-
 ### Features:
 
-- A user can enter their dietary preferences as a list of keywords (ie.
+- A user can enter their dietary preferences as keywords (ie.
   gluten-free, no tomatoes, no dairy)
 - Submitting the form with at least one di
 
@@ -40,14 +39,14 @@ cd aigrub && npm install
 cp .env.example .env.local
 ```
 
-4. If this is an existing project you will need to get the secret key from
+4. If this is an existing project, you must get the secret key from
    another developer. If the project is new, you can generate a secret key by
    signing up for an account at [OpenAi](https://beta.openai.com/signup) and
    going [here](https://beta.openai.com/docs/quickstart/add-your-api-key). NOTE:
-   Without this key your requests will fail and the project won't work.
+   Without this key, your requests will fail, and the project won't work.
 
 5. After setting installing the dependencies and setting up your local
-   environment, you can run the project with:
+   environment, you can run the project with the following:
 
 ```
 npm run dev
