@@ -1,4 +1,4 @@
-import { getMealImageServer } from "../../../api";
+import { getMealImageServer } from "@/api";
 
 // handles creation of the meal image
 export default async function handler(req, res) {

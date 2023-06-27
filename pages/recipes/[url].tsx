@@ -6,7 +6,7 @@ import ClientCookies from "js-cookie";
 
 import Image from "next/image";
 
-import { getMealImageClient, getRecipe } from "../../api";
+import { getMealImageClient, getRecipe } from "@/api";
 
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -17,9 +17,9 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
-import Layout from "../../components/Layout";
+import Layout from "@/components/Layout";
 
-import { convertURLToMealString } from "../../utils";
+import { convertURLToMealString } from "@/utils";
 
 const RecipePage = ({ meal, resolvedUrl }) => {
 	const [imageURL, setImageURL] = useState("");

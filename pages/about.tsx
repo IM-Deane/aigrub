@@ -1,5 +1,3 @@
-import Layout from "../components/Layout";
-
 import Link from "@mui/material/Link";
 
 import Box from "@mui/material/Box";
@@ -7,7 +5,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 
-import ImageGallery from "../components/ImageGallery";
+import ImageGallery from "@/components/ImageGallery";
+import Layout from "@/components/Layout";
 
 const AboutPage = () => (
 	<Layout title="About | AiGrub">

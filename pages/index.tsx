@@ -6,17 +6,17 @@ import Link from "@mui/material/Link";
 import LinearProgress from "@mui/material/LinearProgress";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 
-import Layout from "../components/Layout";
-import MealTypeTabs from "../components/MealTypeTabs";
-import Robby from "../components/Robby";
+import Layout from "@/components/Layout";
+import MealTypeTabs from "@/components/MealTypeTabs";
+import Robby from "@/components/Robby";
 
 import {
 	cleanMealData,
 	convertMealStringToURL,
 	getRandomListOfKeywords,
-} from "../utils";
-import Stack from "@mui/material/Stack";
+} from "@/utils";
 
 export async function getStaticProps() {
 	return {
