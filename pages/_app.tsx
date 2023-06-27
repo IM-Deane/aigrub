@@ -6,10 +6,11 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { theme } from "../utils/theme";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+	const AnyComponent = Component as any;
 	return (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
-			<Component {...pageProps} />
+			<AnyComponent {...pageProps} />
 		</ThemeProvider>
 	);
 }
